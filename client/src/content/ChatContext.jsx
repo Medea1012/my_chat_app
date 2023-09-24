@@ -5,37 +5,36 @@ export const ChatContext = createContext();
 
 export const ChatContextProvider = ({ childern, user }) => {
   const [myState, setMyState] = useState("second");
-  // const [userChats, setUserChats] = useState(null);
-  // const [isUserChatsLoading, setIsUserChatsLoading] = useState(false);
-  // const [userChatsError, setUserChatsError] = useState(null);
+  const [userChats, setUserChats] = useState(null);
+  const [isUserChatsLoading, setIsUserChatsLoading] = useState(false);
+  const [userChatsError, setUserChatsError] = useState(null);
 
-  // useEffect(() => {
-  //   const getUserChats = async () => {
-  //     if (user?._id) {
-  //       setIsUserChatsLoading(true);
-  //       setUserChatsError(null);
+  useEffect(() => {
+    const getUserChats = async () => {
+      if (user?._id) {
+        setIsUserChatsLoading(true);
+        setUserChatsError(null);
 
-  //       const response = await getRequest(`${baseUrl}/chats/${user?._id}`);
+        const response = await getRequest(`${baseUrl}/chats/${user?._id}`);
 
-  //       setIsUserChatsLoading(false);
+        setIsUserChatsLoading(false);
 
-  //       if (response.error) {
-  //         return setUserChatsError(response);
-  //       }
-  //       setUserChats(response);
-  //     }
-  //   };
-  //   getUserChats();
-  // }, [user]);
+        if (response.error) {
+          return setUserChatsError(response);
+        }
+        setUserChats(response);
+      }
+    };
+    getUserChats();
+  }, [user]);
 
   return (
     <ChatContext.Provider
-      // value={{
-      //   userChats,
-      //   isUserChatsLoading,
-      //   userChatsError,
-      // }}
-      value={{ myState }}
+      value={{
+        userChats,
+        isUserChatsLoading,
+        userChatsError,
+      }}
     >
       {childern}
     </ChatContext.Provider>
