@@ -24,7 +24,7 @@ const registerUser = async (req, res) => {
     user = new userModel({ name, email, password });
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(user.password, salt);
-    await user.save();
+    await user.save(); // save to mongoDB database.
     const token = createToken(user._id);
     res.status(200).json({ _id: user._id, name, email, token });
   } catch (error) {
