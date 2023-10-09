@@ -8,7 +8,7 @@ const Login = () => {
 
   return (
     <>
-      <Form onClick={loginUser}>
+      <Form onSubmit={loginUser}>
         <Row
           style={{
             height: "100vh",

@@ -28,7 +28,10 @@ const Register = () => {
                 type="text"
                 placeholder="Name"
                 onChange={(e) =>
-                  updateRegisterInfo({ ...registerInfo, name: e.target.value })
+                  updateRegisterInfo({
+                    ...registerInfo,
+                    name: e.target.value,
+                  })
                 }
               />
               <Form.Control
